@@ -1,4 +1,5 @@
 import React from "react";
+import "./Form.css";
 
 interface FormProps {
   onSubmit: (data: FormData) => void;
@@ -61,6 +62,7 @@ function Form({ onSubmit }: FormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Car adding form</h2>
       <label>
         Brand:
         <input
@@ -70,7 +72,6 @@ function Form({ onSubmit }: FormProps) {
           onChange={handleInputChange}
         />
       </label>
-      <br />
       <label>
         Model:
         <input
@@ -80,7 +81,7 @@ function Form({ onSubmit }: FormProps) {
           onChange={handleInputChange}
         />
       </label>
-      <br />
+
       <label>
         Year:
         <input
@@ -90,10 +91,9 @@ function Form({ onSubmit }: FormProps) {
           onChange={handleInputChange}
         />
       </label>
-      <br />
+
       <label>
         Body Type:
-        <br />
         <select
           name="body_type"
           value={formData.body_type}
@@ -107,7 +107,7 @@ function Form({ onSubmit }: FormProps) {
           <option value="Coupe">Coupe</option>
         </select>
       </label>
-      <br />
+
       <label>
         Mileage (km):
         <input
@@ -117,10 +117,9 @@ function Form({ onSubmit }: FormProps) {
           onChange={handleInputChange}
         />
       </label>
-      <br />
+
       <label>
         Gearbox:
-        <br />
         <label>
           <input
             type="radio"
@@ -131,7 +130,6 @@ function Form({ onSubmit }: FormProps) {
           />
           Manual
         </label>
-        <br />
         <label>
           <input
             type="radio"
@@ -143,10 +141,9 @@ function Form({ onSubmit }: FormProps) {
           Automatic
         </label>
       </label>
-      <br />
+
       <label>
         Fuel:
-        <br />
         <label>
           <input
             type="radio"
@@ -157,7 +154,6 @@ function Form({ onSubmit }: FormProps) {
           />
           Petrol
         </label>
-        <br />
         <label>
           <input
             type="radio"
@@ -168,7 +164,6 @@ function Form({ onSubmit }: FormProps) {
           />
           Diesel
         </label>
-        <br />
         <label>
           <input
             type="radio"
@@ -180,7 +175,6 @@ function Form({ onSubmit }: FormProps) {
           Electric
         </label>
       </label>
-      <br />
       <label>
         Price Per Day:
         <input
@@ -190,7 +184,6 @@ function Form({ onSubmit }: FormProps) {
           onChange={handleInputChange}
         />
       </label>
-      <br />
       <label>
         Horse Power:
         <input
@@ -200,7 +193,6 @@ function Form({ onSubmit }: FormProps) {
           onChange={handleInputChange}
         />
       </label>
-      <br />
       <label>
         Engine Capacity:
         <input
@@ -210,10 +202,9 @@ function Form({ onSubmit }: FormProps) {
           onChange={handleInputChange}
         />
       </label>
-      <br />
+
       <label>
         Purpose:
-        <br />
         <select
           name="purpose"
           value={formData.purpose}
@@ -224,9 +215,8 @@ function Form({ onSubmit }: FormProps) {
           <option value="Commercial">Commercial</option>
         </select>
       </label>
-      <br />
       <button type="submit">Submit</button>
-      <button type="button" onClick={handleReset}>
+      <button type="button" id="reset" onClick={handleReset}>
         Reset
       </button>
     </form>
