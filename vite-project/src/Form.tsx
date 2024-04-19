@@ -203,6 +203,7 @@ function Form({ onSubmit }: FormProps) {
           value={formData.price_per_day}
           onChange={handleInputChange}
           required
+          min="0"
         />
       </label>
       <label>
@@ -213,6 +214,7 @@ function Form({ onSubmit }: FormProps) {
           value={formData.horse_power}
           onChange={handleInputChange}
           required
+          min="0"
         />
       </label>
       <label>
@@ -223,7 +225,7 @@ function Form({ onSubmit }: FormProps) {
           value={formData.engine_capacity}
           onChange={handleInputChange}
           required
-          min="0.1"
+          min="0"
           max="10"
         />
       </label>
