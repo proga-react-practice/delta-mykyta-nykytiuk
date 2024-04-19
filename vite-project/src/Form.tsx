@@ -22,7 +22,7 @@ const initialFormData = {
 interface FormData {
   brand: string;
   model: string;
-  year: number;
+  year: number | null;
   body_type: string;
   mileage_km: number;
   gearbox: string;
@@ -86,6 +86,7 @@ function Form({ onSubmit }: FormProps) {
           name="model"
           value={formData.model}
           onChange={handleInputChange}
+          required
         />
       </label>
 
@@ -96,6 +97,9 @@ function Form({ onSubmit }: FormProps) {
           name="year"
           value={formData.year}
           onChange={handleInputChange}
+          min="2000"
+          max="2024"
+          required
         />
       </label>
 
@@ -105,6 +109,7 @@ function Form({ onSubmit }: FormProps) {
           name="body_type"
           value={formData.body_type}
           onChange={handleInputChange}
+          required
         >
           <option value="">Select...</option>
           <option value="Sedan">Sedan</option>
@@ -116,12 +121,15 @@ function Form({ onSubmit }: FormProps) {
       </label>
 
       <label>
-        Mileage (km):
+        Mileage (1,000 km):
         <input
           type="number"
           name="mileage_km"
           value={formData.mileage_km}
           onChange={handleInputChange}
+          required
+          min="0"
+          max="1000"
         />
       </label>
 
@@ -134,6 +142,7 @@ function Form({ onSubmit }: FormProps) {
             value="Manual"
             checked={formData.gearbox === "Manual"}
             onChange={handleInputChange}
+            required
           />
           Manual
         </label>
@@ -144,6 +153,7 @@ function Form({ onSubmit }: FormProps) {
             value="Automatic"
             checked={formData.gearbox === "Automatic"}
             onChange={handleInputChange}
+            required
           />
           Automatic
         </label>
@@ -158,6 +168,7 @@ function Form({ onSubmit }: FormProps) {
             value="Petrol"
             checked={formData.fuel === "Petrol"}
             onChange={handleInputChange}
+            required
           />
           Petrol
         </label>
@@ -168,6 +179,7 @@ function Form({ onSubmit }: FormProps) {
             value="Diesel"
             checked={formData.fuel === "Diesel"}
             onChange={handleInputChange}
+            required
           />
           Diesel
         </label>
@@ -178,6 +190,7 @@ function Form({ onSubmit }: FormProps) {
             value="Electric"
             checked={formData.fuel === "Electric"}
             onChange={handleInputChange}
+            required
           />
           Electric
         </label>
@@ -189,6 +202,7 @@ function Form({ onSubmit }: FormProps) {
           name="price_per_day"
           value={formData.price_per_day}
           onChange={handleInputChange}
+          required
         />
       </label>
       <label>
@@ -198,15 +212,19 @@ function Form({ onSubmit }: FormProps) {
           name="horse_power"
           value={formData.horse_power}
           onChange={handleInputChange}
+          required
         />
       </label>
       <label>
-        Engine Capacity:
+        Engine Capacity (litters or cm3):
         <input
           type="number"
           name="engine_capacity"
           value={formData.engine_capacity}
           onChange={handleInputChange}
+          required
+          min="0.1"
+          max="10"
         />
       </label>
 
@@ -216,6 +234,7 @@ function Form({ onSubmit }: FormProps) {
           name="purpose"
           value={formData.purpose}
           onChange={handleInputChange}
+          required
         >
           <option value="">Select...</option>
           <option value="Personal">Personal</option>
