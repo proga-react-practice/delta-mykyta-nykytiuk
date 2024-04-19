@@ -5,6 +5,20 @@ interface FormProps {
   onSubmit: (data: FormData) => void;
 }
 
+const initialFormData = {
+  brand: "",
+  model: "",
+  year: 0,
+  body_type: "",
+  mileage_km: 0,
+  gearbox: "",
+  fuel: "",
+  price_per_day: 0,
+  horse_power: 0,
+  engine_capacity: 0,
+  purpose: "",
+};
+
 interface FormData {
   brand: string;
   model: string;
@@ -20,45 +34,37 @@ interface FormData {
 }
 
 function Form({ onSubmit }: FormProps) {
-  const [formData, setFormData] = React.useState<FormData>({
-    brand: "",
-    model: "",
-    year: 0,
-    body_type: "",
-    mileage_km: 0,
-    gearbox: "",
-    fuel: "",
-    price_per_day: 0,
-    horse_power: 0,
-    engine_capacity: 0,
-    purpose: "",
-  });
+  const [formData, setFormData] = React.useState<FormData>(initialFormData);
+
+  const [errors, setErrors] = React.useState<Partial<FormData>>({});
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: "" });
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    onSubmit(formData);
+  function validateForm() {
+    const newErrors: Partial<FormData> = {};
+
+    if (!formData.brand.trim()) {
+      newErrors.brand = "Brand is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   }
 
   const handleReset = () => {
-    setFormData({
-      brand: "",
-      model: "",
-      year: 0,
-      body_type: "",
-      mileage_km: 0,
-      gearbox: "",
-      fuel: "",
-      price_per_day: 0,
-      horse_power: 0,
-      engine_capacity: 0,
-      purpose: "",
-    });
+    setFormData(initialFormData);
   };
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (validateForm()) {
+      onSubmit(formData);
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -70,6 +76,7 @@ function Form({ onSubmit }: FormProps) {
           name="brand"
           value={formData.brand}
           onChange={handleInputChange}
+          required
         />
       </label>
       <label>
