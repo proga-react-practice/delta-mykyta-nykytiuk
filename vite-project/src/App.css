@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+
+#container {
+  display: flex;
+  width: 1350px;
+  flex-direction: row;
+}
+
+#formCar {
+  margin-right: 300px;
+  margin-left: 120px;
+}
