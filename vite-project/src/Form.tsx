@@ -5,6 +5,10 @@ interface FormProps {
   onSubmit: (data: FormData) => void;
 }
 
+const bodyTypes = ["Sedan", "SUV", "Hatchback", "Convertible", "Coupe"];
+
+const purposes = ["Personal", "Commercial"];
+
 const initialFormData = {
   brand: "",
   model: "",
@@ -112,11 +116,11 @@ function Form({ onSubmit }: FormProps) {
           required
         >
           <option value="">Select...</option>
-          <option value="Sedan">Sedan</option>
-          <option value="SUV">SUV</option>
-          <option value="Hatchback">Hatchback</option>
-          <option value="Convertible">Convertible</option>
-          <option value="Coupe">Coupe</option>
+          {bodyTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
         </select>
       </label>
 
@@ -239,8 +243,11 @@ function Form({ onSubmit }: FormProps) {
           required
         >
           <option value="">Select...</option>
-          <option value="Personal">Personal</option>
-          <option value="Commercial">Commercial</option>
+          {purposes.map((purpose) => (
+            <option key={purpose} value={purpose}>
+              {purpose}
+            </option>
+          ))}
         </select>
       </label>
       <button type="submit">Submit</button>
