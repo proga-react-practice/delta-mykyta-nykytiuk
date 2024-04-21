@@ -7,3 +7,8 @@
   background-color: #f9f9f9;
   text-align: left;
 }
+
+#delete {
+  background-color: red;
+  margin: 8px;
+}

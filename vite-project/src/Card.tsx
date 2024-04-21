@@ -4,9 +4,10 @@ import "./Card.css";
 
 type CardProps = {
   data: FormData;
+  onDelete: () => void;
 };
 
-const Card: React.FC<CardProps> = ({ data }) => {
+const Card: React.FC<CardProps> = ({ data, onDelete }) => {
   return (
     <table id="card" style={{ border: "1px solid black", margin: "10px" }}>
       <tr>
@@ -53,6 +54,9 @@ const Card: React.FC<CardProps> = ({ data }) => {
         <th>Purpose:</th>
         <td>{data.purpose}</td>
       </tr>
+      <button id="delete" onClick={onDelete}>
+        Delete
+      </button>
     </table>
   );
 };

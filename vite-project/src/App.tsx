@@ -1,6 +1,3 @@
-// import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
 import "./App.css";
 import React from "react";
 import Form from "./Form";
@@ -13,6 +10,12 @@ function App() {
     setSubmittedData([...submittedData, formData]);
   }
 
+  function handleDelete(index: number) {
+    const newData = [...submittedData];
+    newData.splice(index, 1);
+    setSubmittedData(newData);
+  }
+
   return (
     <div id="container">
       <div id="formCar">
@@ -20,7 +23,7 @@ function App() {
       </div>
       <div id="cardCar">
         {submittedData.map((data, index) => (
-          <Card key={index} data={data} />
+          <Card key={index} data={data} onDelete={() => handleDelete(index)} />
         ))}
       </div>
     </div>
