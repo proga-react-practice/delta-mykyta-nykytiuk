@@ -1,5 +1,5 @@
 import React from "react";
-import "./Form.css";
+import styles from "./Form.module.css";
 
 interface FormProps {
   onSubmit: (data: FormData) => void;
@@ -71,30 +71,32 @@ function Form({ onSubmit }: FormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <h2>Car adding form</h2>
-      <label>
+      <label className={styles.label}>
         Brand:
         <input
           type="text"
           name="brand"
           value={formData.brand}
           onChange={handleInputChange}
+          className={styles.selectInput}
           required
         />
       </label>
-      <label>
+      <label className={styles.label}>
         Model:
         <input
           type="text"
           name="model"
           value={formData.model}
           onChange={handleInputChange}
+          className={styles.selectInput}
           required
         />
       </label>
 
-      <label>
+      <label className={styles.label}>
         Year:
         <input
           type="number"
@@ -103,16 +105,18 @@ function Form({ onSubmit }: FormProps) {
           onChange={handleInputChange}
           min="2000"
           max="2024"
+          className={styles.selectInput}
           required
         />
       </label>
 
-      <label>
+      <label className={styles.label}>
         Body Type:
         <select
           name="body_type"
           value={formData.body_type}
           onChange={handleInputChange}
+          className={styles.selectInput}
           required
         >
           <option value="">Select...</option>
@@ -124,36 +128,39 @@ function Form({ onSubmit }: FormProps) {
         </select>
       </label>
 
-      <label>
+      <label className={styles.label}>
         Mileage (1,000 km):
         <input
           type="number"
           name="mileage_km"
           value={formData.mileage_km}
           onChange={handleInputChange}
+          className={styles.selectInput}
           required
           min="0"
           max="1000"
         />
       </label>
 
-      <label>
+      <label className={styles.label}>
         Gearbox:
-        <label>
+        <label className={styles.label}>
           <input
             type="radio"
             name="gearbox"
             value="Manual"
+            className={styles.radioInput}
             checked={formData.gearbox === "Manual"}
             onChange={handleInputChange}
             required
           />
           Manual
         </label>
-        <label>
+        <label className={styles.label}>
           <input
             type="radio"
             name="gearbox"
+            className={styles.radioInput}
             value="Automatic"
             checked={formData.gearbox === "Automatic"}
             onChange={handleInputChange}
@@ -163,12 +170,13 @@ function Form({ onSubmit }: FormProps) {
         </label>
       </label>
 
-      <label>
+      <label className={styles.label}>
         Fuel:
-        <label>
+        <label className={styles.label}>
           <input
             type="radio"
             name="fuel"
+            className={styles.radioInput}
             value="Petrol"
             checked={formData.fuel === "Petrol"}
             onChange={handleInputChange}
@@ -176,10 +184,11 @@ function Form({ onSubmit }: FormProps) {
           />
           Petrol
         </label>
-        <label>
+        <label className={styles.label}>
           <input
             type="radio"
             name="fuel"
+            className={styles.radioInput}
             value="Diesel"
             checked={formData.fuel === "Diesel"}
             onChange={handleInputChange}
@@ -187,10 +196,11 @@ function Form({ onSubmit }: FormProps) {
           />
           Diesel
         </label>
-        <label>
+        <label className={styles.label}>
           <input
             type="radio"
             name="fuel"
+            className={styles.radioInput}
             value="Electric"
             checked={formData.fuel === "Electric"}
             onChange={handleInputChange}
@@ -199,29 +209,31 @@ function Form({ onSubmit }: FormProps) {
           Electric
         </label>
       </label>
-      <label>
+      <label className={styles.label}>
         Price Per Day:
         <input
           type="number"
           name="price_per_day"
+          className={styles.selectInput}
           value={formData.price_per_day}
           onChange={handleInputChange}
           required
           min="0"
         />
       </label>
-      <label>
+      <label className={styles.label}>
         Horse Power:
         <input
           type="number"
           name="horse_power"
+          className={styles.selectInput}
           value={formData.horse_power}
           onChange={handleInputChange}
           required
           min="0"
         />
       </label>
-      <label>
+      <label className={styles.label}>
         Engine Capacity (litters or cm3):
         <input
           type="number"
@@ -229,18 +241,20 @@ function Form({ onSubmit }: FormProps) {
           value={formData.engine_capacity}
           onChange={handleInputChange}
           required
+          className={styles.selectInput}
           min="0"
           max="10"
         />
       </label>
 
-      <label>
+      <label className={styles.label}>
         Purpose:
         <select
           name="purpose"
           value={formData.purpose}
           onChange={handleInputChange}
           required
+          className={styles.selectInput}
         >
           <option value="">Select...</option>
           {purposes.map((purpose) => (
@@ -250,8 +264,15 @@ function Form({ onSubmit }: FormProps) {
           ))}
         </select>
       </label>
-      <button type="submit">Submit</button>
-      <button type="button" id="reset" onClick={handleReset}>
+      <button type="submit" className={styles.buttonSubmit}>
+        Submit
+      </button>
+      <button
+        type="button"
+        className={styles.buttonReset}
+        id="reset"
+        onClick={handleReset}
+      >
         Reset
       </button>
     </form>

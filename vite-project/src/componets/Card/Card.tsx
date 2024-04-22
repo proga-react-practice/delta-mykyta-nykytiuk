@@ -1,6 +1,6 @@
 import React from "react";
 import { FormData } from "../Form/Form";
-import "./Card.css";
+import styles from "./Card.module.css";
 
 type CardProps = {
   data: FormData;
@@ -9,7 +9,10 @@ type CardProps = {
 
 const Card: React.FC<CardProps> = ({ data, onDelete }) => {
   return (
-    <table id="card" style={{ border: "1px solid black", margin: "10px" }}>
+    <table
+      id={styles.card}
+      style={{ border: "1px solid black", margin: "10px" }}
+    >
       <tr>
         <th>Brand:</th>
         <td>{data.brand}</td>
@@ -54,7 +57,7 @@ const Card: React.FC<CardProps> = ({ data, onDelete }) => {
         <th>Purpose:</th>
         <td>{data.purpose}</td>
       </tr>
-      <button id="delete" onClick={onDelete}>
+      <button id={styles.delete} onClick={onDelete}>
         Delete
       </button>
     </table>
