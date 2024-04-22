@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
-import Form from "./Form";
-import Card from "./Card";
+import Form from "./componets/Form/Form";
+import Card from "./componets/Card/Card";
 
 function App() {
   const [submittedData, setSubmittedData] = React.useState<FormData[]>([]);

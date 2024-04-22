@@ -1,5 +1,5 @@
 import React from "react";
-import { FormData } from "./Form";
+import { FormData } from "../Form/Form";
 import "./Card.css";
 
 type CardProps = {
