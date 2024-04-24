@@ -1,6 +1,19 @@
 import React from "react";
-import styles from "./Form.module.css";
-
+// import styles from "./Form.module.css";
+import {
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormLabel,
+  Typography,
+  Box,
+} from "@mui/material";
 interface FormProps {
   onSubmit: (data: FormData) => void;
 }
@@ -70,212 +83,236 @@ function Form({ onSubmit }: FormProps) {
     }
   }
 
+  const BoxFormStyle = {
+    maxWidth: "500px",
+    margin: "0 auto",
+    padding: "20px",
+    marginRight: "auto",
+    border: "none",
+    borderRadius: "10px",
+    backgroundColor: "#f9f9f9",
+    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
+  };
+
+  const TextFieldStyle = {
+    width: "90%",
+    padding: "8px",
+    marginBottom: "10px",
+  };
+
+  const RadioStyle = {
+    marginBottom: 2,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const ButtonStyle = {
+    width: "10%",
+    padding: "10px",
+    marginTop: "10px",
+    border: "none",
+    borderRadius: "5px",
+    color: "#ffffff",
+    marginRight: "10%",
+  };
+  const BoxButton = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    width: "100%",
+  };
+
+  const RadioGroupStyle = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  };
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <h2>Car adding form</h2>
-      <label className={styles.label}>
-        Brand:
-        <input
-          type="text"
-          name="brand"
-          value={formData.brand}
-          onChange={handleInputChange}
-          className={styles.selectInput}
-          required
-        />
-      </label>
-      <label className={styles.label}>
-        Model:
-        <input
-          type="text"
-          name="model"
-          value={formData.model}
-          onChange={handleInputChange}
-          className={styles.selectInput}
-          required
-        />
-      </label>
-
-      <label className={styles.label}>
-        Year:
-        <input
-          type="number"
-          name="year"
-          value={formData.year}
-          onChange={handleInputChange}
-          min="2000"
-          max="2024"
-          className={styles.selectInput}
-          required
-        />
-      </label>
-
-      <label className={styles.label}>
-        Body Type:
-        <select
+    <Box component="form" onSubmit={handleSubmit} sx={BoxFormStyle}>
+      <Typography
+        variant="h5"
+        sx={{ textAlign: "center", color: "primary.main" }}
+      >
+        Car adding form
+      </Typography>
+      <TextField
+        label="Brand"
+        name="brand"
+        value={formData.brand}
+        onChange={handleInputChange}
+        required
+        sx={TextFieldStyle}
+      />
+      <TextField
+        label="Model"
+        name="model"
+        value={formData.model}
+        onChange={handleInputChange}
+        required
+        sx={TextFieldStyle}
+      />
+      <TextField
+        label="Year"
+        name="year"
+        type="number"
+        value={formData.year}
+        onChange={handleInputChange}
+        required
+        InputProps={{ inputProps: { min: 2000, max: 2024 } }}
+        sx={TextFieldStyle}
+      />
+      <FormControl required sx={TextFieldStyle}>
+        <InputLabel>Body Type</InputLabel>
+        <Select
           name="body_type"
           value={formData.body_type}
           onChange={handleInputChange}
-          className={styles.selectInput}
-          required
+          sx={{ width: "100%" }}
         >
-          <option value="">Select...</option>
+          <MenuItem value="">
+            <em>Select...</em>
+          </MenuItem>
           {bodyTypes.map((type) => (
-            <option key={type} value={type}>
+            <MenuItem key={type} value={type}>
               {type}
-            </option>
+            </MenuItem>
           ))}
-        </select>
-      </label>
-
-      <label className={styles.label}>
-        Mileage (1,000 km):
-        <input
-          type="number"
-          name="mileage_km"
-          value={formData.mileage_km}
+        </Select>
+      </FormControl>
+      <TextField
+        label="Mileage (1,000 km)"
+        name="mileage_km"
+        type="number"
+        value={formData.mileage_km}
+        onChange={handleInputChange}
+        required
+        InputProps={{ inputProps: { min: 1, max: 1000 } }}
+        sx={TextFieldStyle}
+      />
+      <FormControl component="fieldset" required sx={TextFieldStyle}>
+        <FormLabel component="legend">Gearbox</FormLabel>
+        <RadioGroup
+          name="gearbox"
+          value={formData.gearbox}
           onChange={handleInputChange}
-          className={styles.selectInput}
-          required
-          min="0"
-          max="1000"
-        />
-      </label>
-
-      <label className={styles.label}>
-        Gearbox:
-        <label className={styles.label}>
-          <input
-            type="radio"
-            name="gearbox"
+          sx={RadioGroupStyle}
+        >
+          <FormControlLabel
             value="Manual"
-            className={styles.radioInput}
-            checked={formData.gearbox === "Manual"}
-            onChange={handleInputChange}
+            control={<Radio />}
+            label="Manual"
+            sx={RadioStyle}
             required
           />
-          Manual
-        </label>
-        <label className={styles.label}>
-          <input
-            type="radio"
-            name="gearbox"
-            className={styles.radioInput}
+          <FormControlLabel
             value="Automatic"
-            checked={formData.gearbox === "Automatic"}
-            onChange={handleInputChange}
-            required
+            control={<Radio />}
+            label="Automatic"
+            sx={RadioStyle}
           />
-          Automatic
-        </label>
-      </label>
-
-      <label className={styles.label}>
-        Fuel:
-        <label className={styles.label}>
-          <input
-            type="radio"
-            name="fuel"
-            className={styles.radioInput}
+        </RadioGroup>
+      </FormControl>
+      <FormControl component="fieldset" required sx={TextFieldStyle}>
+        <FormLabel component="legend">Fuel</FormLabel>
+        <RadioGroup
+          name="fuel"
+          value={formData.fuel}
+          onChange={handleInputChange}
+          sx={RadioGroupStyle}
+        >
+          <FormControlLabel
             value="Petrol"
-            checked={formData.fuel === "Petrol"}
-            onChange={handleInputChange}
+            control={<Radio />}
+            label="Petrol"
+            sx={RadioStyle}
             required
           />
-          Petrol
-        </label>
-        <label className={styles.label}>
-          <input
-            type="radio"
-            name="fuel"
-            className={styles.radioInput}
+          <FormControlLabel
             value="Diesel"
-            checked={formData.fuel === "Diesel"}
-            onChange={handleInputChange}
-            required
+            control={<Radio />}
+            label="Diesel"
+            sx={RadioStyle}
           />
-          Diesel
-        </label>
-        <label className={styles.label}>
-          <input
-            type="radio"
-            name="fuel"
-            className={styles.radioInput}
+          <FormControlLabel
             value="Electric"
-            checked={formData.fuel === "Electric"}
-            onChange={handleInputChange}
-            required
+            control={<Radio />}
+            label="Electric"
+            sx={RadioStyle}
           />
-          Electric
-        </label>
-      </label>
-      <label className={styles.label}>
-        Price Per Day:
-        <input
-          type="number"
-          name="price_per_day"
-          className={styles.selectInput}
-          value={formData.price_per_day}
-          onChange={handleInputChange}
-          required
-          min="0"
-        />
-      </label>
-      <label className={styles.label}>
-        Horse Power:
-        <input
-          type="number"
-          name="horse_power"
-          className={styles.selectInput}
-          value={formData.horse_power}
-          onChange={handleInputChange}
-          required
-          min="0"
-        />
-      </label>
-      <label className={styles.label}>
-        Engine Capacity (litters or cm3):
-        <input
-          type="number"
-          name="engine_capacity"
-          value={formData.engine_capacity}
-          onChange={handleInputChange}
-          required
-          className={styles.selectInput}
-          min="0"
-          max="10"
-        />
-      </label>
-
-      <label className={styles.label}>
-        Purpose:
-        <select
+        </RadioGroup>
+      </FormControl>
+      <TextField
+        label="Price Per Day"
+        name="price_per_day"
+        type="number"
+        value={formData.price_per_day}
+        onChange={handleInputChange}
+        required
+        InputProps={{ inputProps: { min: 1 } }}
+        sx={TextFieldStyle}
+      />
+      <TextField
+        label="Horse Power"
+        name="horse_power"
+        type="number"
+        value={formData.horse_power}
+        onChange={handleInputChange}
+        required
+        InputProps={{ inputProps: { min: 1 } }}
+        sx={TextFieldStyle}
+      />
+      <TextField
+        label="Engine Capacity (liters or cm3)"
+        name="engine_capacity"
+        type="number"
+        value={formData.engine_capacity}
+        onChange={handleInputChange}
+        required
+        InputProps={{ inputProps: { min: 0, max: 10 } }}
+        sx={TextFieldStyle}
+      />
+      <FormControl required sx={TextFieldStyle}>
+        <InputLabel>Purpose</InputLabel>
+        <Select
           name="purpose"
           value={formData.purpose}
           onChange={handleInputChange}
-          required
-          className={styles.selectInput}
+          sx={{ width: "100%" }}
         >
-          <option value="">Select...</option>
+          <MenuItem value="">
+            <em>Select...</em>
+          </MenuItem>
           {purposes.map((purpose) => (
-            <option key={purpose} value={purpose}>
+            <MenuItem key={purpose} value={purpose}>
               {purpose}
-            </option>
+            </MenuItem>
           ))}
-        </select>
-      </label>
-      <button type="submit" className={styles.buttonSubmit}>
-        Submit
-      </button>
-      <button
-        type="button"
-        className={styles.buttonReset}
-        id="reset"
-        onClick={handleReset}
-      >
-        Reset
-      </button>
-    </form>
+        </Select>
+      </FormControl>
+      <Box sx={BoxButton}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{ backgroundColor: "#28a745", ButtonStyle }}
+        >
+          Submit
+        </Button>
+        <Button
+          type="button"
+          variant="contained"
+          color="secondary"
+          onClick={handleReset}
+          sx={{ backgroundColor: "#9c8f91", ButtonStyle }}
+        >
+          Reset
+        </Button>
+      </Box>
+    </Box>
   );
 }
 
