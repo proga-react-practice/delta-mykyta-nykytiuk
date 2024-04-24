@@ -1,0 +1,57 @@
+.form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.label {
+  margin-bottom: 10px;
+  display: block;
+  font-weight: bold;
+}
+
+.selectInput {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.radioInput {
+  margin-right: 5px;
+  display: inline-block;
+}
+
+
+.buttonSubmit {
+  background-color: #28a745;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  width: 90%;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.buttonReset {
+  background-color: #9c8f91;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  width: 90%;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
