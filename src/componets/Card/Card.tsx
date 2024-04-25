@@ -1,66 +1,97 @@
 import React from "react";
-import { FormData } from "../Form/Form";
-import styles from "./Card.module.css";
+import { FormData } from "../../interfaces";
+// import styles from "./Card.module.css";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Button,
+} from "@mui/material";
 
 type CardProps = {
   data: FormData;
   onDelete: () => void;
 };
 
+const TableContainerStyle = {
+  border: "none",
+  margin: "10px",
+  maxWidth: 650,
+  borderRadius: "10px",
+  backgroundColor: "#f9f9f9",
+  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
+};
+
+const DeleteButtonStyle = {
+  marginTop: 2,
+  marginBottom: 2,
+  marginLeft: 2,
+  marginRight: 2,
+  backgroundColor: "#dc3545",
+};
+
 const Card: React.FC<CardProps> = ({ data, onDelete }) => {
   return (
-    <table
-      id={styles.card}
-      style={{ border: "1px solid black", margin: "10px" }}
-    >
-      <tr>
-        <th>Brand:</th>
-        <td>{data.brand}</td>
-      </tr>
-      <tr>
-        <th>Model:</th>
-        <td>{data.model}</td>
-      </tr>
-      <tr>
-        <th>Year:</th>
-        <td>{data.year}</td>
-      </tr>
-      <tr>
-        <th>Body Type:</th>
-        <td>{data.body_type}</td>
-      </tr>
-      <tr>
-        <th>Mileage:</th>
-        <td>{data.mileage_km}</td>
-      </tr>
-      <tr>
-        <th>Gearbox:</th>
-        <td>{data.gearbox}</td>
-      </tr>
-      <tr>
-        <th>Fuel:</th>
-        <td>{data.fuel}</td>
-      </tr>
-      <tr>
-        <th>Daily price:</th>
-        <td>{data.price_per_day}</td>
-      </tr>
-      <tr>
-        <th>Horse Power:</th>
-        <td>{data.horse_power}</td>
-      </tr>
-      <tr>
-        <th>Engine Capacity:</th>
-        <td>{data.engine_capacity}</td>
-      </tr>
-      <tr>
-        <th>Purpose:</th>
-        <td>{data.purpose}</td>
-      </tr>
-      <button id={styles.delete} onClick={onDelete}>
+    <TableContainer sx={TableContainerStyle}>
+      <Table aria-label="a dense table" size="small">
+        <TableBody>
+          <TableRow>
+            <TableCell>Brand:</TableCell>
+            <TableCell>{data.brand}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Model:</TableCell>
+            <TableCell>{data.model}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Year:</TableCell>
+            <TableCell>{data.year}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Body Type:</TableCell>
+            <TableCell>{data.body_type}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Mileage:</TableCell>
+            <TableCell>{data.mileage_km}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Gearbox:</TableCell>
+            <TableCell>{data.gearbox}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Fuel:</TableCell>
+            <TableCell>{data.fuel}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Price per day:</TableCell>
+            <TableCell>{data.price_per_day}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Horse Power:</TableCell>
+            <TableCell>{data.horse_power}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Engine Capacity:</TableCell>
+            <TableCell>{data.engine_capacity}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Purpose:</TableCell>
+            <TableCell>{data.purpose}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={onDelete}
+        sx={DeleteButtonStyle}
+      >
         Delete
-      </button>
-    </table>
+      </Button>
+    </TableContainer>
   );
 };
 
