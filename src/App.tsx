@@ -2,6 +2,8 @@ import "./App.css";
 import React from "react";
 import Form from "./componets/Form/Form";
 import Card from "./componets/Card/Card";
+import { FormData } from "./interfaces";
+import { Box } from "@mui/material";
 
 function App() {
   const [submittedData, setSubmittedData] = React.useState<FormData[]>([]);
@@ -16,17 +18,26 @@ function App() {
     setSubmittedData(newData);
   }
 
+  const ContainerStyle = {
+    display: "flex",
+    width: "1350px",
+    flexDirection: "row",
+  };
+  const BoxFormStyle = {
+    marginRight: "300px",
+    marginLeft: "120px",
+  };
   return (
-    <div id="container">
-      <div id="formCar">
+    <Box sx={ContainerStyle}>
+      <Box sx={BoxFormStyle}>
         <Form onSubmit={handleSubmit} />
-      </div>
-      <div id="cardCar">
+      </Box>
+      <Box>
         {submittedData.map((data, index) => (
           <Card key={index} data={data} onDelete={() => handleDelete(index)} />
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 
