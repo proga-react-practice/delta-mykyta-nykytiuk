@@ -1,5 +1,6 @@
 import React from "react";
 // import styles from "./Form.module.css";
+import { FormData } from "../../interfaces";
 import {
   TextField,
   FormControl,
@@ -35,20 +36,6 @@ const initialFormData = {
   engine_capacity: 0,
   purpose: "",
 };
-
-interface FormData {
-  brand: string;
-  model: string;
-  year: number | null;
-  body_type: string;
-  mileage_km: number;
-  gearbox: string;
-  fuel: string;
-  price_per_day: number;
-  horse_power: number;
-  engine_capacity: number;
-  purpose: string;
-}
 
 function Form({ onSubmit }: FormProps) {
   const [formData, setFormData] = React.useState<FormData>(initialFormData);
