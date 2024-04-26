@@ -1,4 +1,3 @@
-import "./App.css";
 import React from "react";
 import Form from "./componets/Form/Form";
 import Card from "./componets/Card/Card";
@@ -22,10 +21,12 @@ function App() {
     display: "flex",
     width: "1350px",
     flexDirection: "row",
+    marginTop: "50px",
+    marginBottom: "50px",
   };
   const BoxFormStyle = {
     marginRight: "300px",
-    marginLeft: "120px",
+    marginLeft: "200px",
   };
 
   return (

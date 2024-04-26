@@ -77,7 +77,11 @@ function Form({ onSubmit }: FormProps) {
   }
 
   const BoxFormStyle = {
-    maxWidth: "500px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    width: "500px",
     margin: "0 auto",
     padding: "20px",
     marginRight: "auto",

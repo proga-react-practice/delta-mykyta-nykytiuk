@@ -16,7 +16,6 @@ type CardProps = {
 
 const TableContainerStyle = {
   border: "none",
-  margin: "10px",
   maxWidth: 650,
   borderRadius: "10px",
   backgroundColor: "#f9f9f9",
