@@ -19,16 +19,20 @@ function App() {
 
   const ContainerStyle = {
     display: "flex",
-    width: "1350px",
-    flexDirection: "row",
+    flexDirection: { sm: "row", xs: "column" },
+    width: { sm: "1350px", xs: "100%" },
+    justifyContent: { sm: "flex-start", xs: "center" },
+    alignItems: { sm: "flex-start", xs: "center" },
+    marginLeft: { sm: "0", xs: "12%" },
     marginTop: "50px",
     marginBottom: "50px",
   };
-  const BoxFormStyle = {
-    marginRight: "300px",
-    marginLeft: "200px",
-  };
 
+  const BoxFormStyle = {
+    marginRight: { sm: "300px", xs: "0" },
+    marginLeft: { sm: "200px", xs: "0" },
+    marginBottom: "30px",
+  };
   return (
     <Box sx={ContainerStyle}>
       <Box sx={BoxFormStyle}>

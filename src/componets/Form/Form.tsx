@@ -81,7 +81,7 @@ function Form({ onSubmit }: FormProps) {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    width: "500px",
+    width: { sm: "500px", xs: "300px" },
     margin: "0 auto",
     padding: "20px",
     marginRight: "auto",
