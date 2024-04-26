@@ -27,6 +27,7 @@ function App() {
     marginRight: "300px",
     marginLeft: "120px",
   };
+
   return (
     <Box sx={ContainerStyle}>
       <Box sx={BoxFormStyle}>

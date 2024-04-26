@@ -1,5 +1,5 @@
 import React from "react";
-// import styles from "./Form.module.css";
+import { SelectChangeEvent } from "@mui/material";
 import { FormData } from "../../interfaces";
 import {
   TextField,
@@ -43,6 +43,12 @@ function Form({ onSubmit }: FormProps) {
   const [errors, setErrors] = React.useState<Partial<FormData>>({});
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: "" });
+  }
+
+  function handleSelectChange(event: SelectChangeEvent<string>) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
     setErrors({ ...errors, [name]: "" });
@@ -157,7 +163,7 @@ function Form({ onSubmit }: FormProps) {
         <Select
           name="body_type"
           value={formData.body_type}
-          onChange={handleInputChange}
+          onChange={handleSelectChange}
           sx={{ width: "100%" }}
         >
           <MenuItem value="">
@@ -267,7 +273,7 @@ function Form({ onSubmit }: FormProps) {
         <Select
           name="purpose"
           value={formData.purpose}
-          onChange={handleInputChange}
+          onChange={handleSelectChange}
           sx={{ width: "100%" }}
         >
           <MenuItem value="">

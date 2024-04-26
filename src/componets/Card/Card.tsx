@@ -1,6 +1,5 @@
 import React from "react";
 import { FormData } from "../../interfaces";
-// import styles from "./Card.module.css";
 import {
   Table,
   TableBody,
@@ -22,6 +21,7 @@ const TableContainerStyle = {
   borderRadius: "10px",
   backgroundColor: "#f9f9f9",
   boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
+  marginBottom: 4,
 };
 
 const DeleteButtonStyle = {
