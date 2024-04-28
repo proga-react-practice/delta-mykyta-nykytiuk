@@ -3,6 +3,9 @@ import Form from "./componets/Form/Form";
 import Card from "./componets/Card/Card";
 import { FormData } from "./interfaces";
 import { Box } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./theme";
+import { CssBaseline } from "@mui/material";
 
 function App() {
   const [submittedData, setSubmittedData] = React.useState<FormData[]>([]);
@@ -26,6 +29,7 @@ function App() {
     marginLeft: { sm: "0", xs: "12%" },
     marginTop: "50px",
     marginBottom: "50px",
+    backgroundColor: "background.default",
   };
 
   const BoxFormStyle = {
@@ -34,16 +38,23 @@ function App() {
     marginBottom: "30px",
   };
   return (
-    <Box sx={ContainerStyle}>
-      <Box sx={BoxFormStyle}>
-        <Form onSubmit={handleSubmit} />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={ContainerStyle}>
+        <Box sx={BoxFormStyle}>
+          <Form onSubmit={handleSubmit} />
+        </Box>
+        <Box>
+          {submittedData.map((data, index) => (
+            <Card
+              key={index}
+              data={data}
+              onDelete={() => handleDelete(index)}
+            />
+          ))}
+        </Box>
       </Box>
-      <Box>
-        {submittedData.map((data, index) => (
-          <Card key={index} data={data} onDelete={() => handleDelete(index)} />
-        ))}
-      </Box>
-    </Box>
+    </ThemeProvider>
   );
 }
 
