@@ -77,6 +77,7 @@ function Form({ onSubmit }: FormProps) {
   }
 
   const BoxFormStyle = {
+    backgroundColor: "secondary.main",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -87,8 +88,8 @@ function Form({ onSubmit }: FormProps) {
     marginRight: "auto",
     border: "none",
     borderRadius: "10px",
-    backgroundColor: "#f9f9f9",
     boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
+    color: "primary.main",
   };
 
   const TextFieldStyle = {
@@ -110,7 +111,6 @@ function Form({ onSubmit }: FormProps) {
     marginTop: "10px",
     border: "none",
     borderRadius: "5px",
-    color: "#ffffff",
     marginRight: "10%",
   };
   const BoxButton = {
@@ -295,16 +295,26 @@ function Form({ onSubmit }: FormProps) {
           type="submit"
           variant="contained"
           color="primary"
-          sx={{ backgroundColor: "#28a745", ButtonStyle }}
+          sx={{
+            "&:hover": {
+              backgroundColor: "primary.dark",
+            },
+            ButtonStyle,
+          }}
         >
           Submit
         </Button>
         <Button
           type="button"
           variant="contained"
-          color="secondary"
+          color="primary"
           onClick={handleReset}
-          sx={{ backgroundColor: "#9c8f91", ButtonStyle }}
+          sx={{
+            "&:hover": {
+              backgroundColor: "primary.dark",
+            },
+            ButtonStyle,
+          }}
         >
           Reset
         </Button>

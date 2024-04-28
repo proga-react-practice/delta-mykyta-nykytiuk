@@ -18,7 +18,8 @@ const TableContainerStyle = {
   border: "none",
   maxWidth: 650,
   borderRadius: "10px",
-  backgroundColor: "#f9f9f9",
+  backgroundColor: "secondary.main",
+  color: "primary.main",
   boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
   marginBottom: 4,
 };
@@ -28,7 +29,11 @@ const DeleteButtonStyle = {
   marginBottom: 2,
   marginLeft: 2,
   marginRight: 2,
-  backgroundColor: "#dc3545",
+  color: "secondary.main",
+  backgroundColor: "error.main",
+  "&:hover": {
+    backgroundColor: "error.dark",
+  },
 };
 
 const Card: React.FC<CardProps> = ({ data, onDelete }) => {
@@ -82,12 +87,7 @@ const Card: React.FC<CardProps> = ({ data, onDelete }) => {
           </TableRow>
         </TableBody>
       </Table>
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={onDelete}
-        sx={DeleteButtonStyle}
-      >
+      <Button variant="contained" onClick={onDelete} sx={DeleteButtonStyle}>
         Delete
       </Button>
     </TableContainer>
