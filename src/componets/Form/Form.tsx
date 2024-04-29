@@ -18,6 +18,7 @@ import {
 interface FormProps {
   onSubmit: (data: FormData) => void;
 }
+import { InputAdornment } from "@mui/material";
 
 const bodyTypes = ["Sedan", "SUV", "Hatchback", "Convertible", "Coupe"];
 
@@ -191,13 +192,13 @@ function Form({ onSubmit }: FormProps) {
         </Select>
       </FormControl>
       <TextField
-        label="Mileage (1,000 km)"
+        label="Mileage"
         name="mileage_km"
         type="number"
         value={formData.mileage_km}
         onChange={handleInputChange}
         required
-        InputProps={{ inputProps: { min: 1, max: 1000 } }}
+        InputProps={{ inputProps: { min: 1, max: 1000 }, endAdornment: <InputAdornment position="end">1,000 km</InputAdornment> }}
         sx={TextFieldStyle}
       />
       <FormControl component="fieldset" required sx={TextFieldStyle}>
@@ -259,7 +260,7 @@ function Form({ onSubmit }: FormProps) {
         value={formData.price_per_day}
         onChange={handleInputChange}
         required
-        InputProps={{ inputProps: { min: 1 } }}
+        InputProps={{ inputProps: { min: 1 }, endAdornment: <InputAdornment position="end">$</InputAdornment> }}
         sx={TextFieldStyle}
       />
       <TextField
@@ -269,17 +270,17 @@ function Form({ onSubmit }: FormProps) {
         value={formData.horse_power}
         onChange={handleInputChange}
         required
-        InputProps={{ inputProps: { min: 1 } }}
+        InputProps={{ inputProps: { min: 1 }, endAdornment: <InputAdornment position="end">kW</InputAdornment> }}
         sx={TextFieldStyle}
       />
       <TextField
-        label="Engine Capacity (liters or cm3)"
+        label="Engine Capacity"
         name="engine_capacity"
         type="number"
         value={formData.engine_capacity}
         onChange={handleInputChange}
         required
-        InputProps={{ inputProps: { min: 0, max: 10 } }}
+        InputProps={{ inputProps: { min: 0, max: 10 }, endAdornment: <InputAdornment position="end">cm3</InputAdornment> }}
         sx={TextFieldStyle}
       />
       <FormControl required sx={TextFieldStyle}>
