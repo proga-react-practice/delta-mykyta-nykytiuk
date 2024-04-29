@@ -22,6 +22,15 @@ const TableContainerStyle = {
   color: "primary.main",
   boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
   marginBottom: 4,
+  animation: 'fadeIn 1.5s forwards', 
+  '@keyframes fadeIn': {
+    '0%': {
+      opacity: 0,
+    },
+    '100%': {
+      opacity: 1,
+    },
+  },
 };
 
 const DeleteButtonStyle = {

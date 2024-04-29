@@ -90,6 +90,16 @@ function Form({ onSubmit }: FormProps) {
     borderRadius: "10px",
     boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
     color: "primary.main",
+    opacity: 0, 
+    animation: 'fadeIn 1.5s forwards', 
+    '@keyframes fadeIn': {
+      '0%': {
+        opacity: 0,
+      },
+      '100%': {
+        opacity: 1,
+      },
+    },
   };
 
   const TextFieldStyle = {
