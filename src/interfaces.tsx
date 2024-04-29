@@ -1,13 +1,13 @@
 export interface FormData {
   brand: string;
   model: string;
-  year: number | null;
+  year: number;
   body_type: string;
-  mileage_km: number;
+  mileage_km: number | string;
   gearbox: string;
   fuel: string;
-  price_per_day: number;
-  horse_power: number;
-  engine_capacity: number;
+  price_per_day: number  | string;
+  horse_power: number  | string ;
+  engine_capacity: number  | string;
   purpose: string;
 }

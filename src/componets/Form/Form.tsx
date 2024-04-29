@@ -1,6 +1,6 @@
 import React from "react";
 import { SelectChangeEvent } from "@mui/material";
-import { FormData } from "../../interfaces";
+import { FormData} from "../../interfaces";
 import {
   TextField,
   FormControl,
@@ -15,6 +15,8 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+
+
 interface FormProps {
   onSubmit: (data: FormData) => void;
 }
@@ -55,20 +57,37 @@ function Form({ onSubmit }: FormProps) {
     setErrors({ ...errors, [name]: "" });
   }
 
-  function validateForm() {
-    const newErrors: Partial<FormData> = {};
+function validateForm() {
+  const newErrors: Partial<FormData> = {};
+  let isValid = true;
 
-    if (!formData.brand.trim()) {
-      newErrors.brand = "Brand is required";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  if (formData.mileage_km && formData.mileage_km.toString().startsWith('0')) {
+    newErrors.mileage_km = "Mileage should not start with '0'";
+    isValid = false;
   }
 
-  const handleReset = () => {
-    setFormData(initialFormData);
-  };
+  if (formData.engine_capacity && formData.engine_capacity.toString().startsWith('0')) {
+    newErrors.engine_capacity = "Engine capacity should not start with '0'";
+    isValid = false;
+  }
+
+  if (formData.price_per_day && formData.price_per_day.toString().startsWith('0')) {
+    newErrors.price_per_day = "Price per day should not start with '0'";
+    isValid = false;
+  }
+
+  if (formData.horse_power && formData.horse_power.toString().startsWith('0')) {
+    newErrors.horse_power = "Horse power should not start with '0'";
+    isValid = false;
+  }
+
+  setErrors(newErrors);
+  return isValid;
+}
+
+const handleReset = () => {
+  setFormData(initialFormData);
+};
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -200,7 +219,9 @@ function Form({ onSubmit }: FormProps) {
         required
         InputProps={{ inputProps: { min: 1, max: 1000 }, endAdornment: <InputAdornment position="end">1,000 km</InputAdornment> }}
         sx={TextFieldStyle}
-      />
+        error={!!errors.mileage_km}
+        helperText={errors.mileage_km}
+/>
       <FormControl component="fieldset" required sx={TextFieldStyle}>
         <FormLabel component="legend">Gearbox</FormLabel>
         <RadioGroup
@@ -262,6 +283,8 @@ function Form({ onSubmit }: FormProps) {
         required
         InputProps={{ inputProps: { min: 1 }, endAdornment: <InputAdornment position="end">$</InputAdornment> }}
         sx={TextFieldStyle}
+        error={!!errors.price_per_day}
+        helperText={errors.price_per_day}
       />
       <TextField
         label="Horse Power"
@@ -272,6 +295,8 @@ function Form({ onSubmit }: FormProps) {
         required
         InputProps={{ inputProps: { min: 1 }, endAdornment: <InputAdornment position="end">kW</InputAdornment> }}
         sx={TextFieldStyle}
+        error={!!errors.horse_power}
+  helperText={errors.horse_power}
       />
       <TextField
         label="Engine Capacity"
@@ -282,6 +307,8 @@ function Form({ onSubmit }: FormProps) {
         required
         InputProps={{ inputProps: { min: 0, max: 10 }, endAdornment: <InputAdornment position="end">cm3</InputAdornment> }}
         sx={TextFieldStyle}
+        error={!!errors.engine_capacity}
+        helperText={errors.engine_capacity}
       />
       <FormControl required sx={TextFieldStyle}>
         <InputLabel>Purpose</InputLabel>
