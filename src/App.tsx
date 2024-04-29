@@ -32,7 +32,7 @@ function App() {
     backgroundColor: "background.default",
   };
 
-  const BoxFormStyle = {
+  const FormLayout = {
     marginRight: { sm: "300px", xs: "0" },
     marginLeft: { sm: "200px", xs: "0" },
     marginBottom: "30px",
@@ -41,7 +41,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={ContainerStyle}>
-        <Box sx={BoxFormStyle}>
+        <Box sx={FormLayout}>
           <Form onSubmit={handleSubmit} />
         </Box>
         <Box>
