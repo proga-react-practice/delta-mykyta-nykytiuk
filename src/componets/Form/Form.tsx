@@ -9,13 +9,11 @@ import {
   MenuItem,
   Button,
   RadioGroup,
-  FormControlLabel,
-  Radio,
   FormLabel,
   Typography,
   Box,
 } from "@mui/material";
-
+import RadioFormControlLabel from "../RadioFormControlLabel/RadioFormControlLabel";
 
 interface FormProps {
   onSubmit: (data: FormData) => void;
@@ -230,18 +228,17 @@ const handleReset = () => {
           onChange={handleInputChange}
           sx={RadioGroupStyle}
         >
-          <FormControlLabel
+          <RadioFormControlLabel
             value="Manual"
-            control={<Radio />}
             label="Manual"
             sx={RadioStyle}
             required
           />
-          <FormControlLabel
+          <RadioFormControlLabel
             value="Automatic"
-            control={<Radio />}
             label="Automatic"
             sx={RadioStyle}
+            required
           />
         </RadioGroup>
       </FormControl>
@@ -253,24 +250,23 @@ const handleReset = () => {
           onChange={handleInputChange}
           sx={RadioGroupStyle}
         >
-          <FormControlLabel
+          <RadioFormControlLabel
             value="Petrol"
-            control={<Radio />}
             label="Petrol"
             sx={RadioStyle}
             required
           />
-          <FormControlLabel
+          <RadioFormControlLabel
             value="Diesel"
-            control={<Radio />}
             label="Diesel"
             sx={RadioStyle}
+            required
           />
-          <FormControlLabel
+          <RadioFormControlLabel
             value="Electric"
-            control={<Radio />}
             label="Electric"
             sx={RadioStyle}
+            required
           />
         </RadioGroup>
       </FormControl>
