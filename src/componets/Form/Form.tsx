@@ -208,7 +208,7 @@ const handleReset = () => {
     <Box component="form" onSubmit={handleSubmit} sx={BoxFormStyle}>
       <Typography
         variant="h5"
-        sx={{ textAlign: "center", color: "primary.main" }}
+        sx={{ textAlign: "center", color: "primary.main", marginBottom: {xs: "10px" } }}
       >
         Car adding form
       </Typography>
