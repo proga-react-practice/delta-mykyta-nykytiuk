@@ -39,6 +39,17 @@ const initialFormData = {
   purpose: "",
 };
 
+const radioOptionsFuel = [
+  { value: 'Petrol', label: 'Petrol' },
+  { value: 'Diesel', label: 'Diesel' },
+  { value: 'Electric', label: 'Electric' },
+];
+
+const radioOptionsGearbox = [
+  { value: 'Manual', label: 'Manual' },
+  { value: 'Automatic', label: 'Automatic' },
+];
+
 function Form({ onSubmit }: FormProps) {
   const [formData, setFormData] = React.useState<FormData>(initialFormData);
 
@@ -174,12 +185,6 @@ const handleReset = () => {
     marginBottom: "10px",
   };
 
-  const RadioStyle = {
-    marginBottom: 2,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
 
   const ButtonStyle = {
     width: "10%",
@@ -290,16 +295,13 @@ const handleReset = () => {
               ? { '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'red' } } }
               : {}
           ]}>
-          <RadioFormControlLabel
-            value="Manual"
-            label="Manual"
-            sx={RadioStyle}
-          />
-          <RadioFormControlLabel
-            value="Automatic"
-            label="Automatic"
-            sx={RadioStyle}
-          />
+          {radioOptionsGearbox.map((option) => (
+            <RadioFormControlLabel
+              key={option.value}
+              value={option.value}
+              label={option.label}
+            />
+          ))}
         </RadioGroup>
         {errors.gearbox && <FormHelperText sx={{ color: 'red' }}>{errors.gearbox}</FormHelperText>}
       </FormControl>
@@ -315,21 +317,13 @@ const handleReset = () => {
               ? { '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'red' } } }
               : {}
           ]}>
-          <RadioFormControlLabel
-            value="Petrol"
-            label="Petrol"
-            sx={RadioStyle}
-          />
-          <RadioFormControlLabel
-            value="Diesel"
-            label="Diesel"
-            sx={RadioStyle}
-          />
-          <RadioFormControlLabel
-            value="Electric"
-            label="Electric"
-            sx={RadioStyle}
-          />
+          {radioOptionsFuel.map((option) => (
+            <RadioFormControlLabel
+              key={option.value}
+              value={option.value}
+              label={option.label}
+            />
+          ))}
         </RadioGroup>
         {errors.fuel && <FormHelperText sx={{ color: 'red' }}>{errors.fuel}</FormHelperText>}
       </FormControl>
