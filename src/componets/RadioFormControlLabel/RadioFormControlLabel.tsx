@@ -1,10 +1,11 @@
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
+import { SxProps } from '@mui/system';
 
 interface RadioFormControlLabelProps {
   value: string;
   label: string;
-  sx: any; 
+  sx: SxProps; 
   required?: boolean;
 }
 
