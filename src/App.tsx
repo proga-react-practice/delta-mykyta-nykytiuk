@@ -1,16 +1,15 @@
 import React from "react";
 import Form from "./componets/Form/Form";
 import Card from "./componets/Card/Card";
-import { FormData } from "./interfaces";
+import { FormData } from "./interfaces/interfaces";
 import { Box } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme";
+import theme from "./themes/theme";
 import { CssBaseline } from "@mui/material";
 
 function App() {
   const [submittedData, setSubmittedData] = React.useState<FormData[]>([]);
   function handleSubmit(formData: FormData) {
-    console.log(formData);
     setSubmittedData([...submittedData, formData]);
   }
 
