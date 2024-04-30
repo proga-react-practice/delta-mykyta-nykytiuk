@@ -14,6 +14,7 @@ import {
   Box,
 } from "@mui/material";
 import RadioFormControlLabel from "../RadioFormControlLabel/RadioFormControlLabel";
+import FormHelperText from '@mui/material/FormHelperText';
 
 interface FormProps {
   onSubmit: (data: FormData) => void;
@@ -27,7 +28,7 @@ const purposes = ["Personal", "Commercial"];
 const initialFormData = {
   brand: "",
   model: "",
-  year: 0,
+  year: 2000,
   body_type: "",
   mileage_km: 0,
   gearbox: "",
@@ -55,34 +56,81 @@ function Form({ onSubmit }: FormProps) {
     setErrors({ ...errors, [name]: "" });
   }
 
-function validateForm() {
-  const newErrors: Partial<FormData> = {};
-  let isValid = true;
+  function validateForm() {
+    const newErrors: Partial<FormData> = {};
+    let isValid = true;
 
-  if (formData.mileage_km && formData.mileage_km.toString().startsWith('0')) {
-    newErrors.mileage_km = "Mileage should not start with '0'";
-    isValid = false;
+    const mileage = parseInt(formData.mileage_km as string, 10);
+
+    if (!mileage || mileage < 1 || mileage > 1000 || formData.mileage_km.toString().startsWith('0')) {
+      newErrors.mileage_km = !mileage ? "Mileage is required" : 
+                             formData.mileage_km.toString().startsWith('0') ? "Mileage should not start with '0'" : 
+                             "Mileage should be between 1 and 1000";
+      isValid = false;
+    }
+
+    if (!formData.engine_capacity || parseInt(formData.engine_capacity.toString(), 10) < 1 || parseInt(formData.engine_capacity.toString(), 10) > 1000 || formData.engine_capacity.toString().startsWith('0')) {
+      newErrors.engine_capacity = !formData.engine_capacity ? "Engine capacity is required" : 
+                                  formData.engine_capacity.toString().startsWith('0') ? "Engine capacity should not start with '0'" : 
+                                  "Engine capacity should be between 1 and 1000";
+      isValid = false;
+    }
+
+    if (!formData.price_per_day || +formData.price_per_day < 1 || formData.price_per_day.toString().startsWith('0')) {
+      newErrors.price_per_day = !formData.price_per_day ? "Price per day is required" : 
+                                +formData.price_per_day < 1 ? "Price per day should be greater than 1" : 
+                                "Price per day should not start with '0'";
+      isValid = false;
+    }
+
+    if (!formData.horse_power || +formData.horse_power < 1 || formData.horse_power.toString().startsWith('0')) {
+      newErrors.horse_power = !formData.horse_power ? "Horse power is required" : 
+                              +formData.horse_power < 1 ? "Horse power should be greater than 1" : 
+                              "Horse power should not start with '0'";
+      isValid = false;
+    }
+
+    if (!formData.brand) {
+      newErrors.brand = "Brand is required";
+      isValid = false;
+    }
+
+    if (!formData.model) {
+      newErrors.model = "Model is required";
+      isValid = false;
+    }
+
+    const year = parseInt(formData.year as string, 10); 
+
+    if (!year || year < 2000 || year > 2024) {
+      newErrors.year = !year ? "Year is required" : 
+                       "Year should be between 2000 and 2024";
+      isValid = false;
+    }
+
+    if (!formData.body_type) {
+      newErrors.body_type = "Body type is required";
+      isValid = false;
+    }
+
+    if (!formData.gearbox) {
+      newErrors.gearbox = "Gearbox is required";
+      isValid = false;
+    }
+
+    if (!formData.fuel) {
+      newErrors.fuel = "Fuel is required";
+      isValid = false;
+    }
+
+  if (!formData.purpose) {
+      newErrors.purpose = "Purpose is required";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
   }
-
-  if (formData.engine_capacity && formData.engine_capacity.toString().startsWith('0')) {
-    newErrors.engine_capacity = "Engine capacity should not start with '0'";
-    isValid = false;
-  }
-
-  if (formData.price_per_day && formData.price_per_day.toString().startsWith('0')) {
-    newErrors.price_per_day = "Price per day should not start with '0'";
-    isValid = false;
-  }
-
-  if (formData.horse_power && formData.horse_power.toString().startsWith('0')) {
-    newErrors.horse_power = "Horse power should not start with '0'";
-    isValid = false;
-  }
-
-  setErrors(newErrors);
-  return isValid;
-}
-
 const handleReset = () => {
   setFormData(initialFormData);
 };
@@ -169,16 +217,18 @@ const handleReset = () => {
         name="brand"
         value={formData.brand}
         onChange={handleInputChange}
-        required
         sx={TextFieldStyle}
+        error={!!errors.brand}
+        helperText={errors.brand}
       />
       <TextField
         label="Model"
         name="model"
         value={formData.model}
         onChange={handleInputChange}
-        required
         sx={TextFieldStyle}
+        error={!!errors.model}
+        helperText={errors.model}
       />
       <TextField
         label="Year"
@@ -186,11 +236,19 @@ const handleReset = () => {
         type="number"
         value={formData.year}
         onChange={handleInputChange}
-        required
-        InputProps={{ inputProps: { min: 2000, max: 2024 } }}
         sx={TextFieldStyle}
+        error={!!errors.year}
+        helperText={errors.year}
       />
-      <FormControl required sx={TextFieldStyle}>
+      <FormControl
+        error={Boolean(errors.body_type)}
+        sx={[
+          TextFieldStyle,
+          errors.body_type
+            ? { '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'red' } } }
+            : {}
+        ]}
+      >
         <InputLabel>Body Type</InputLabel>
         <Select
           name="body_type"
@@ -207,6 +265,7 @@ const handleReset = () => {
             </MenuItem>
           ))}
         </Select>
+        {errors.body_type && <FormHelperText>{errors.body_type}</FormHelperText>}
       </FormControl>
       <TextField
         label="Mileage"
@@ -214,61 +273,65 @@ const handleReset = () => {
         type="number"
         value={formData.mileage_km}
         onChange={handleInputChange}
-        required
-        InputProps={{ inputProps: { min: 1, max: 1000 }, endAdornment: <InputAdornment position="end">1,000 km</InputAdornment> }}
+        InputProps={{ endAdornment: <InputAdornment position="end">1,000 km</InputAdornment> }}
         sx={TextFieldStyle}
         error={!!errors.mileage_km}
         helperText={errors.mileage_km}
 />
-      <FormControl component="fieldset" required sx={TextFieldStyle}>
+      <FormControl component="fieldset"  sx={TextFieldStyle}>
         <FormLabel component="legend">Gearbox</FormLabel>
         <RadioGroup
           name="gearbox"
           value={formData.gearbox}
           onChange={handleInputChange}
-          sx={RadioGroupStyle}
-        >
+          sx={[
+            RadioGroupStyle,
+            errors.gearbox
+              ? { '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'red' } } }
+              : {}
+          ]}>
           <RadioFormControlLabel
             value="Manual"
             label="Manual"
             sx={RadioStyle}
-            required
           />
           <RadioFormControlLabel
             value="Automatic"
             label="Automatic"
             sx={RadioStyle}
-            required
           />
         </RadioGroup>
+        {errors.gearbox && <FormHelperText sx={{ color: 'red' }}>{errors.gearbox}</FormHelperText>}
       </FormControl>
-      <FormControl component="fieldset" required sx={TextFieldStyle}>
+      <FormControl component="fieldset"  sx={TextFieldStyle}>
         <FormLabel component="legend">Fuel</FormLabel>
         <RadioGroup
           name="fuel"
           value={formData.fuel}
           onChange={handleInputChange}
-          sx={RadioGroupStyle}
-        >
+          sx={[
+            RadioGroupStyle,
+            errors.fuel
+              ? { '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'red' } } }
+              : {}
+          ]}>
           <RadioFormControlLabel
             value="Petrol"
             label="Petrol"
             sx={RadioStyle}
-            required
           />
           <RadioFormControlLabel
             value="Diesel"
             label="Diesel"
             sx={RadioStyle}
-            required
           />
           <RadioFormControlLabel
             value="Electric"
             label="Electric"
             sx={RadioStyle}
-            required
           />
         </RadioGroup>
+        {errors.fuel && <FormHelperText sx={{ color: 'red' }}>{errors.fuel}</FormHelperText>}
       </FormControl>
       <TextField
         label="Price Per Day"
@@ -276,8 +339,7 @@ const handleReset = () => {
         type="number"
         value={formData.price_per_day}
         onChange={handleInputChange}
-        required
-        InputProps={{ inputProps: { min: 1 }, endAdornment: <InputAdornment position="end">$</InputAdornment> }}
+        InputProps={{endAdornment: <InputAdornment position="end">$</InputAdornment> }}
         sx={TextFieldStyle}
         error={!!errors.price_per_day}
         helperText={errors.price_per_day}
@@ -288,8 +350,7 @@ const handleReset = () => {
         type="number"
         value={formData.horse_power}
         onChange={handleInputChange}
-        required
-        InputProps={{ inputProps: { min: 1 }, endAdornment: <InputAdornment position="end">kW</InputAdornment> }}
+        InputProps={{endAdornment: <InputAdornment position="end">kW</InputAdornment> }}
         sx={TextFieldStyle}
         error={!!errors.horse_power}
   helperText={errors.horse_power}
@@ -300,19 +361,22 @@ const handleReset = () => {
         type="number"
         value={formData.engine_capacity}
         onChange={handleInputChange}
-        required
-        InputProps={{ inputProps: { min: 0, max: 10 }, endAdornment: <InputAdornment position="end">cm3</InputAdornment> }}
+        InputProps={{endAdornment: <InputAdornment position="end">cm3</InputAdornment> }}
         sx={TextFieldStyle}
         error={!!errors.engine_capacity}
         helperText={errors.engine_capacity}
       />
-      <FormControl required sx={TextFieldStyle}>
+      <FormControl
+        error={Boolean(errors.purpose)}
+        sx={[TextFieldStyle, errors.purpose ? { '& .MuiOutlinedInput-root': { '& fieldset': { } } } : {}]}
+      >
         <InputLabel>Purpose</InputLabel>
         <Select
           name="purpose"
           value={formData.purpose}
           onChange={handleSelectChange}
           sx={{ width: "100%" }}
+          error={!!errors.purpose}
         >
           <MenuItem value="">
             <em>Select...</em>
@@ -323,6 +387,7 @@ const handleReset = () => {
             </MenuItem>
           ))}
         </Select>
+        {errors.purpose && <FormHelperText>{errors.purpose}</FormHelperText>}
       </FormControl>
       <Box sx={BoxButton}>
         <Button

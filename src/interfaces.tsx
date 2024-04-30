@@ -1,7 +1,7 @@
 export interface FormData {
   brand: string;
   model: string;
-  year: number;
+  year: number | string;
   body_type: string;
   mileage_km: number | string;
   gearbox: string;
