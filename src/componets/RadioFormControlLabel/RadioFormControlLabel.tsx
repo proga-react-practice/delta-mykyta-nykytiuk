@@ -2,20 +2,27 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import { SxProps } from '@mui/system';
 
+
+const RadioStyle: SxProps = {
+  marginBottom: 2,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
 interface RadioFormControlLabelProps {
   value: string;
   label: string;
-  sx: SxProps; 
   required?: boolean;
 }
 
-const RadioFormControlLabel: React.FC<RadioFormControlLabelProps> = ({ value, label, sx, required }) => {
+const RadioFormControlLabel: React.FC<RadioFormControlLabelProps> = ({ value, label, required }) => {
   return (
     <FormControlLabel
       value={value}
       control={<Radio />}
       label={label}
-      sx={sx}
+      sx={RadioStyle}
       required={required}
     />
   );
