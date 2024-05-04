@@ -21,21 +21,30 @@ function App() {
 
   const ContainerStyle = {
     display: "flex",
-    flexDirection: { sm: "row", xs: "column" },
-    width: { sm: "1350px", xs: "100%" },
-    justifyContent: { sm: "flex-start", xs: "center" },
-    alignItems: { sm: "flex-start", xs: "center" },
-    marginLeft: { sm: "0", xs: "12%" },
-    marginTop: "50px",
-    marginBottom: "50px",
+    flexDirection: { md: "row", sm: "column", xs: "column" },
+    justifyContent: { md: "space-evenly", sm: "center", xs: "center"},
+    marginTop: "2%",
+    width: "100%",
     backgroundColor: "background.default",
   };
 
   const FormLayout = {
-    marginRight: { sm: "300px", xs: "0" },
-    marginLeft: { sm: "200px", xs: "0" },
+    display: "flex",
+    width: {md: "35%",sm : "100%", xs : "100%"},
     marginBottom: "30px",
+    justifyContent: {md: "flex-start",sm : "center", xs : "center"},
+    alignItems:{sm : "center", xs : "center"},
   };
+
+  const CardLayout = {
+    width: {md: "30%",sm : "100%", xs : "100%"},
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: {md: "flex-start",sm : "center", xs : "center"},
+    alignItems:{sm : "center", xs : "center"},
+  }; 
+
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -43,7 +52,7 @@ function App() {
         <Box sx={FormLayout}>
           <Form onSubmit={handleSubmit} />
         </Box>
-        <Box>
+        <Box sx={CardLayout}>
           {submittedData.map((data, index) => (
             <Card
               key={index}
