@@ -33,7 +33,7 @@ function App() {
     width: {md: "35%",sm : "100%", xs : "100%"},
     marginBottom: "30px",
     justifyContent: {md: "flex-start",sm : "center", xs : "center"},
-    alignItems:{sm : "center", xs : "center"},
+    alignItems:{sm : "flex-start", xs : "center"},
   };
 
   const CardLayout = {

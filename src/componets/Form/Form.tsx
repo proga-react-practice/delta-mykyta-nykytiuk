@@ -150,7 +150,7 @@ const handleReset = () => {
     event.preventDefault();
     if (validateForm()) {
       onSubmit(formData);
-      // setFormData(initialFormData);
+      setFormData(initialFormData);
     }
   }
 
