@@ -150,7 +150,7 @@ const handleReset = () => {
     event.preventDefault();
     if (validateForm()) {
       onSubmit(formData);
-      setFormData(initialFormData);
+      // setFormData(initialFormData);
     }
   }
 
@@ -160,10 +160,10 @@ const handleReset = () => {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    width: { sm: "500px", xs: "300px" },
-    margin: "0 auto",
+    width: "100%",
+    maxWidth: { md: "500px", sm: "500px", xs: "500px"},
+    minWidth: { md: "300px", sm: "400px", xs: "370px"},
     padding: "20px",
-    marginRight: "auto",
     border: "none",
     borderRadius: "10px",
     boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
